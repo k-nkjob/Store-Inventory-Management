@@ -100,6 +100,19 @@ The performance script builds a 10,000-row fixture and compares:
 
 It verifies result parity and reports rows loaded, elapsed time and the query plan. Timing results are not claimed until a completed GitHub Actions run provides them.
 
+### Recorded CI result
+
+[GitHub Actions run #1](https://github.com/k-nkjob/Store-Inventory-Management/actions/runs/35047662647) completed successfully on Ubuntu 24.04 with PHP 8.3.33 and SQLite.
+
+| Measurement | Baseline-shaped path | Modernized path |
+|---|---:|---:|
+| Dataset | 10,000 rows | 10,000 rows |
+| Matching results | 100 rows | 100 rows |
+| Rows loaded into PHP | 10,000 | 20 |
+| Elapsed time in this run | 7.184 ms | 0.248 ms |
+
+SQLite reported `SEARCH items USING COVERING INDEX idx_items_name`. The elapsed values are one reproducible CI observation, not a guarantee for every machine or production database. The durable improvement is the reduction from full-table application loading to indexed search with a bounded page.
+
 ## Documentation
 
 - [Baseline audit](docs/BASELINE_AUDIT.md)
