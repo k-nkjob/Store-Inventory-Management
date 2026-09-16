@@ -39,6 +39,10 @@ The original copyright notice and MIT license are retained in [`LICENSE`](LICENS
 
 No third-party server was tested. Review and verification are limited to this fork and isolated test databases.
 
+## Browser verification
+
+The modernized application was started in GitHub Codespaces with PHP 8.3 and SQLite. Login, prefix search, item registration, receive, issue, over-issue rejection, protected deletion, logout and persisted state after re-login were manually verified on 2026-09-16.
+
 ## Modernized implementation
 
 - PHP 8.3 and `strict_types`
@@ -117,6 +121,7 @@ SQLite reported `SEARCH items USING COVERING INDEX idx_items_name`. The elapsed 
 
 - [Baseline audit](docs/BASELINE_AUDIT.md)
 - [Modernization and benchmark design](docs/MODERNIZATION_REPORT.md)
+- [InfinityFree deployment guide](modernized/DEPLOY_INFINITYFREE.md)
 - [Original upstream README](https://github.com/theamanjs/Store-Inventory-Management/blob/9c82d29b214ec3506e729c17c155281c4c518d88/README.md)
 
 ## English summary

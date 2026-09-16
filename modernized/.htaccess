@@ -1,0 +1,17 @@
+Options -Indexes
+RewriteEngine On
+
+# Block application internals, credentials, database definitions and tests.
+RewriteRule ^(?:src|database|tests)(?:/|$) - [F,L,NC]
+RewriteRule ^config(?:\.|$) - [F,L,NC]
+RewriteRule ^(?:README\.md|DEPLOY_INFINITYFREE\.md)$ - [F,L,NC]
+<FilesMatch "\.(?:sql|sqlite|log|env)$">
+    Require all denied
+</FilesMatch>
+
+# InfinityFree fixes the document root to htdocs. Route public requests
+# into public/ without exposing the rest of the application.
+RewriteRule ^public/ - [L]
+RewriteRule ^$ public/index.php [L]
+RewriteRule ^(.+)$ public/$1 [L]
+
