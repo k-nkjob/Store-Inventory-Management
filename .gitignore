@@ -1,0 +1,5 @@
+/modernized/config.php
+/modernized/database/*.sqlite
+/modernized/database/*.sqlite-*
+/.phpunit.cache/
+
