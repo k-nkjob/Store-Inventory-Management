@@ -28,7 +28,7 @@ require dirname(__DIR__) . '/partials/header.php';
         <h1><?= e($item['name']) ?></h1>
         <p><?= e($item['category']) ?> ／ 現在庫 <strong><?= e($item['balance']) ?> <?= e($item['unit']) ?></strong></p>
     </div>
-    <a class="primary-button" href="/stock/movement.php">＋ 入出庫登録</a>
+    <a class="primary-button" href="/stock/movement.php?item_id=<?= e($item['id']) ?>">＋ 入出庫登録</a>
 </section>
 
 <section class="subsection history-section">
@@ -64,4 +64,3 @@ require dirname(__DIR__) . '/partials/header.php';
     <div class="button-row"><a href="/dashboard.php">← 在庫一覧へ戻る</a></div>
 </section>
 <?php require dirname(__DIR__) . '/partials/footer.php'; ?>
-
