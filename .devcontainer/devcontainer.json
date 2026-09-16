@@ -1,0 +1,14 @@
+{
+  "name": "Legacy PHP Inventory Modernization",
+  "image": "mcr.microsoft.com/devcontainers/php:1-8.3-bookworm",
+  "forwardPorts": [8000],
+  "portsAttributes": {
+    "8000": {
+      "label": "Modernized inventory system",
+      "onAutoForward": "openPreview"
+    }
+  },
+  "postCreateCommand": "cd modernized && php database/seed.php",
+  "postStartCommand": "cd modernized && php -S 0.0.0.0:8000 -t public"
+}
+
