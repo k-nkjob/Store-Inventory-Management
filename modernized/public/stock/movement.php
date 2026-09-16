@@ -6,7 +6,13 @@ require dirname(__DIR__, 2) . '/src/bootstrap.php';
 $auth->requireLogin();
 
 $errors = [];
-$input = ['item_id' => '', 'type' => 'receive', 'quantity' => '', 'note' => ''];
+$requestedItemId = filter_var($_GET['item_id'] ?? null, FILTER_VALIDATE_INT);
+$input = [
+    'item_id' => $requestedItemId ? (string) $requestedItemId : '',
+    'type' => 'receive',
+    'quantity' => '',
+    'note' => '',
+];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     Csrf::requireValid($_POST['csrf_token'] ?? null);
     $input = [
@@ -62,4 +68,3 @@ require dirname(__DIR__) . '/partials/header.php';
     </form>
 </section>
 <?php require dirname(__DIR__) . '/partials/footer.php'; ?>
-
