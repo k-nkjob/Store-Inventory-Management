@@ -55,6 +55,7 @@ The modernized application was started in GitHub Codespaces with PHP 8.3 and SQL
 - Central HTML escaping
 - Server-side validation
 - Transactional stock receive/issue processing
+- Per-item movement ledger with dates, quantities, notes and pagination
 - Negative-stock prevention with rollback
 - Prefix search, indexes, `LIMIT` / `OFFSET` pagination
 - Security response headers

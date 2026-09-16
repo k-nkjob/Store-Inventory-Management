@@ -113,6 +113,39 @@ final class InventoryRepository
         return $statement->fetchAll();
     }
 
+    public function movementHistory(int $itemId, int $page, int $perPage = 20): array
+    {
+        $page = max(1, $page);
+        $perPage = max(1, min(100, $perPage));
+        $offset = ($page - 1) * $perPage;
+
+        $countStatement = $this->pdo->prepare(
+            'SELECT COUNT(*) FROM stock_movements WHERE item_id = :item_id'
+        );
+        $countStatement->execute(['item_id' => $itemId]);
+        $total = (int) $countStatement->fetchColumn();
+
+        $statement = $this->pdo->prepare(
+            'SELECT id, movement_type, quantity, note, created_at
+             FROM stock_movements
+             WHERE item_id = :item_id
+             ORDER BY id DESC
+             LIMIT :limit OFFSET :offset'
+        );
+        $statement->bindValue(':item_id', $itemId, PDO::PARAM_INT);
+        $statement->bindValue(':limit', $perPage, PDO::PARAM_INT);
+        $statement->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $statement->execute();
+
+        return [
+            'movements' => $statement->fetchAll(),
+            'total' => $total,
+            'page' => $page,
+            'per_page' => $perPage,
+            'pages' => max(1, (int) ceil($total / $perPage)),
+        ];
+    }
+
     private function escapeLike(string $value): string
     {
         return str_replace(['!', '%', '_'], ['!!', '!%', '!_'], $value);

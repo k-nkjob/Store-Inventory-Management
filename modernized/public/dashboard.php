@@ -30,17 +30,18 @@ require __DIR__ . '/partials/header.php';
     <?php foreach ($result['items'] as $item): ?>
         <tr>
             <td><?= e($item['id']) ?></td>
-            <td><strong><?= e($item['name']) ?></strong></td>
+            <td><strong><a class="item-link" href="/items/show.php?id=<?= e($item['id']) ?>"><?= e($item['name']) ?></a></strong></td>
             <td><?= e($item['category']) ?></td>
             <td><?= e($item['balance']) ?> <?= e($item['unit']) ?></td>
             <td><?= e(substr((string) $item['created_at'], 0, 10)) ?></td>
-            <td>
+            <td><div class="action-group">
+                <a href="/items/show.php?id=<?= e($item['id']) ?>">履歴</a>
                 <form action="/items/delete.php" method="post" onsubmit="return confirm('削除しますか？')">
                     <input type="hidden" name="csrf_token" value="<?= e(Csrf::token()) ?>">
                     <input type="hidden" name="id" value="<?= e($item['id']) ?>">
                     <button type="submit" class="danger-link">削除</button>
                 </form>
-            </td>
+            </div></td>
         </tr>
     <?php endforeach; ?>
     <?php if (!$result['items']): ?><tr><td colspan="6">該当する商品はありません。</td></tr><?php endif; ?>
@@ -71,4 +72,3 @@ require __DIR__ . '/partials/header.php';
     </div>
 </section>
 <?php require __DIR__ . '/partials/footer.php'; ?>
-

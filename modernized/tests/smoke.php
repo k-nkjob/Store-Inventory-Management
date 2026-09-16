@@ -51,6 +51,11 @@ try {
     $service->record($itemId, 'issue', 4, 'Department use');
     expect((int) $repository->find($itemId)['balance'] === 6, 'Balance must be updated transactionally.');
 
+    $history = $repository->movementHistory($itemId, 1, 20);
+    expect($history['total'] === 2, 'Item history must contain receive and issue records.');
+    expect(count($history['movements']) === 2, 'Item history page must return both records.');
+    expect($history['movements'][0]['note'] === 'Department use', 'Newest movement note must be returned first.');
+
     try {
         $service->record($itemId, 'issue', 7, 'Over issue');
         throw new RuntimeException('FAIL: Over-issue must throw.');
@@ -73,4 +78,3 @@ try {
 } finally {
     @unlink($databasePath);
 }
-
