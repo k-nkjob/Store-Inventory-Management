@@ -1,7 +1,10 @@
 </main>
+<?php if ($auth->check()): ?>
+    </div>
+</div>
+<?php endif; ?>
 <footer class="site-footer">
-    <p>MIT-licensed upstream project modernization study.</p>
+    <p>Modern Inventory / PHP + MySQL</p>
 </footer>
 </body>
 </html>
-
