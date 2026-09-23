@@ -491,3 +491,33 @@ body.app-authenticated .form-stack select{
   .summary-grid,.movement-grid{grid-template-columns:1fr}
   .panel-heading{align-items:flex-start;flex-direction:column}
 }
+
+
+/* === CONTRAST GUARDRAILS V1 ===
+   High-contrast enterprise palette. Dark text stays on light surfaces,
+   white text is reserved for sufficiently dark blue/green surfaces. */
+:root{
+  --read-text:#182337;
+  --read-muted:#5f6f84;
+  --read-link:#0b5fd7;
+  --read-action:#1769df;
+}
+body.app-authenticated{color:var(--read-text)!important}
+.dashboard-hero p:last-child,
+.panel-count,
+.movement-topline small,
+.topbar-user{color:var(--read-muted)!important}
+.panel-link,.item-link{color:var(--read-link)!important}
+.hero-action,
+body.app-authenticated .search-form button{
+  background:var(--read-action)!important;
+  color:#fff!important;
+}
+.sidebar-nav a:first-of-type{
+  background:#1769df!important;
+  color:#fff!important;
+}
+:focus-visible{
+  outline:3px solid rgba(23,105,223,.28)!important;
+  outline-offset:3px!important;
+}
